@@ -1,0 +1,37 @@
+language: node_js
+node_js:
+  - '6'
+
+env:
+  global:
+    - GITHUB_REPO: "hess3077/hess-kn"
+    - secure: "SfKnd2q/Pr3oBfgf8lZNGhVa1K48AkcMFO3tJp/N6JgMyJtEfvNoj23+B6XBApfY+kr9bgOXve6Kz6Rp+q/6dvufSU8cdLBxXmIaZSvoprZr0+lCUnc0zxTzIHrW9ouciRarOuag5YWwH5PSO23XsAFhK4DS0vuFJBILQBdCmgTVXdqFaPABfm9b5I5Idgq4qua4ZjuNx8QkYnLKaSNsqurWHg8nyn5aGWKPMJwCRxtXgGJVVOUFvL/L1JjqcU7zgwGrpnQ3KFQ8gr+QRPtRMXItGYXcHTGz6jf78VF+PeP5M57vcTxLjW1awohLCjASE1816gzL7mTaKirk+K3Ztk5hdqrQQc1rIKX+ojJkaaisf3rqI//f5ZejQktwDN8JLNNUIMnFQi8AMQd9ZD0IILXyehD+lCrt+POmZoidjFPuO6RPA0vTrA2IHDsCoukyJ8k4tMbixBGqvPpsa78BbLQfBDmGjT60L92zSz5NaKRfTB97BrThfEeJr7OrhouFgcH6cgqFNJoXCm2Oaj7hBYpppWJazk/2jI2axSbBwcm1iLXAe7cdDtxREvbGC/pIi06dkvFiSnaNCDlrD1UqgqXAr2r1rw43XYOb/wYpyowC1deZ9BV8/cJhEiXgPVrn5DZq0ORI5dj4K/3Pi95Gj7JPhbEIVry4grxsZHexylg="
+
+addons:
+  sonarcloud:
+    organization: "hess3077-github" # the key of the org you chose at step #3
+    token:
+      secure: "uy6Cwtpb79v6UFV9xrVRNugF5h1EYXdTIZ3Akq98TWWXQ8ZLT86gTOEGxBWxzwX44TgE3r6FJuJ7Cz0XTOYa/PlMIoG6M1hc/CNtOfHZBw8IaMkCdnGfVLg629HyNBaMPWZmITKjoSUfxiCkaOoFXZ69ICq1EvGTGTuDBrt5uHF96ypAI4fY6T6JMvnJu0baajDMspfUcDA0KpZmX/hMbIwwGABkv8P9esDOKsNOCEos0/BG6QjykeAjQoU7x/FmjIviu98EyinBEsTQ17BsI9GCI1i9+qNL9vf2MHTjrNy6DViZp1wypA89Yoy3xOS9GiSW5X2Y5Asolh4qYt+Xfu0e9IQjRtgbKD28XuNYY2mMloK2u+5wvfaY4w7asMmc0qMwGUhdN+Gibx6WwpAAfDtpJAuuzHN8rDvgQw9Ebwdn3p2lWa43xRyhrFqbRUvZX/4+bOot0e2SP5f2Oo/We1cPoRrihthJgN+Dgl0E+C08gCzE+n3ZEiaWyuWRXnAfN7PGtnAEA1JI1gbkKb1oR67a6NwXzh2S0Ncpqs0HRE8WD++RzVco2slV9s07xORScCc/HbFyJBkQQk1CKcdCG5NBOINWHmFPsIgPijfS91EBIwoION77tn5LvnPCL1BTmXxddRjqGQvWSoWEr5vchNAnGqW8owbTHNG+mLkUcpc=" # encrypted value of your token
+
+before_install:
+  - npm i -g npm@^5
+
+script:
+   - sonar-scanner
+
+notifications:
+  irc:
+    template:
+      - "%{repository_slug}#%{build_number} (%{branch} - %{commit} : %{author}): %{message}"
+      - "Change view : %{compare_url}"
+      - "Build details : %{build_url}"
+  email:
+    recipients:
+      - hess.website@gmail.com
+    on_success: always
+    on_failure: always
+  slack:
+    template:
+      - "Build <%{build_url}|#%{build_number}: %{commit_subject}> (<%{compare_url}|%{commit}>) of %{repository_slug}@%{branch} by %{author} %{result} in %{duration}"
+    rooms:
+      - hess-kn:FsAjzGENr3KPZr8p6TC7dDVV#hess-kn
