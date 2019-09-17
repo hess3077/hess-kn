@@ -8,11 +8,10 @@ import { ApplicationService } from 'src/services/application.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  
   title = 'hess-kn';
-  private applications = [];
 
-  constructor(private ApplicationService: ApplicationService) { 
-    this.applications = this.ApplicationService.applications;
+  constructor(private ApplicationService: ApplicationService) {
   }
 
   ngOnInit() {

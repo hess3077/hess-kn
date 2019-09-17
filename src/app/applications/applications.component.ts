@@ -8,23 +8,15 @@ import { ApplicationService } from 'src/services/application.service';
 })
 export class ApplicationsComponent implements OnInit {
   
-  private applications = [];
+  private applications : [];
 
-  constructor(private ApplicationService: ApplicationService) { 
-   //console.log(this.ApplicationService.getApplications());
+  constructor(private ApplicationService: ApplicationService) {
   }
 
   ngOnInit() {
-    console.log(this.ApplicationService.getApplications());
+    this.applications = this.ApplicationService.getApplications();
+    
+    console.log(this.applications);
     console.log('test');
   }
-
-  onEteindre() {
-    if(confirm('Etes-vous sûr de vouloir éteindre tous vos appareils ?')) {
-      this.ApplicationService.getApplications();
-    } else {
-      return null;
-    }
-  }
-
 }
